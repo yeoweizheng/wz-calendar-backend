@@ -16,8 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from user.urls import url_patterns as user_urls;
+from schedule.urls import url_patterns as schedule_urls;
 
-all_urls = user_urls;
+all_urls = user_urls + schedule_urls;
 
 urlpatterns = [
     path('admin/', admin.site.urls),

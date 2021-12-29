@@ -14,3 +14,14 @@ class ScheduleItemListCreate(BaseViewMixin, generics.ListCreateAPIView):
             return ScheduleItem.objects.filter(user=self.request.user)
 
     serializer_class = ScheduleItemSeriallizer
+
+
+class ScheduleItemRetrieveUpdateDestroy(BaseViewMixin, generics.RetrieveUpdateDestroyAPIView):
+
+    lookup_field = 'id'
+    lookup_url_kwarg = 'id'
+
+    def get_queryset(self):
+        return ScheduleItem.objects.filter(user=self.request.user)
+    
+    serializer_class = ScheduleItemSeriallizer

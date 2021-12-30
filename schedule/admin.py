@@ -6,5 +6,8 @@ class ScheduleItemAdmin(admin.ModelAdmin):
     list_display = ('user', 'name', 'date', 'done')
     list_filter = ('user', ('date', DateRangeFilter), 'done')
 
+    def get_rangefilter_date_title(self, request, field_path):
+        return 'By date'
+
 
 admin.site.register(ScheduleItem, ScheduleItemAdmin)

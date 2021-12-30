@@ -6,6 +6,7 @@ class ScheduleItemAdmin(admin.ModelAdmin):
     list_display = ('user', 'name', 'date', 'done')
     list_filter = ('user', ('date', DateRangeFilter), 'done')
     search_fields = ('name',)
+    ordering = ('+date',)
 
     def get_rangefilter_date_title(self, request, field_path):
         return 'By date'

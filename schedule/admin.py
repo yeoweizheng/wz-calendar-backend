@@ -3,7 +3,7 @@ from schedule.models import ScheduleItem
 
 class ScheduleItemAdmin(admin.ModelAdmin):
     list_display = ('user', 'name', 'date', 'done')
-    list_filter = ('user', )
+    list_filter = ('user', 'date', 'done')
 
 
 admin.site.register(ScheduleItem, ScheduleItemAdmin)

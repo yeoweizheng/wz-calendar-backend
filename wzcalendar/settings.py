@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'rangefilter',
     'user.apps.UserConfig',
     'schedule.apps.ScheduleConfig',
 ]

@@ -5,7 +5,7 @@ class ScheduleItemSeriallizer(serializers.ModelSerializer):
 
     class Meta:
         model = ScheduleItem
-        fields = ('id', 'name', 'details', 'date', 'attributes')
+        fields = ('id', 'name', 'details', 'date', 'done')
     
     def save(self):
         return super().save(user=self.context['request'].user)

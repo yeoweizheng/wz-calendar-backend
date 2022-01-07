@@ -1,5 +1,5 @@
 from django.contrib import admin
-from schedule.models import ScheduleItem
+from schedule.models import ScheduleItem, Tag
 from rangefilter.filters import DateRangeFilter
 
 class ScheduleItemAdmin(admin.ModelAdmin):
@@ -13,3 +13,4 @@ class ScheduleItemAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ScheduleItem, ScheduleItemAdmin)
+admin.site.register(Tag)

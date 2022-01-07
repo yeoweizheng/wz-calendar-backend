@@ -51,4 +51,8 @@ class TagRetrieveUpdateDestroy(BaseViewMixin, generics.RetrieveUpdateDestroyAPIV
     def get_queryset(self):
         return Tag.objects.filter(user=self.request.user)
     
+    def destroy(self, request, *args, **kwargs):
+        ScheduleItem.objects.filter(tag__id=kwargs['id']).update(tag=None)
+        return super().destroy(request, *args, **kwargs)
+
     serializer_class = TagSerializer

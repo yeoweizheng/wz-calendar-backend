@@ -38,7 +38,7 @@ class ScheduleItemRetrieveUpdateDestroy(BaseViewMixin, generics.RetrieveUpdateDe
 class TagListCreate(BaseViewMixin, generics.ListCreateAPIView):
 
     def get_queryset(self):
-        return Tag.objects.filter(user=self.request.user)
+        return Tag.objects.filter(user=self.request.user).order_by('name')
     
     serializer_class = TagSerializer
 

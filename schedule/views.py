@@ -1,6 +1,5 @@
 from django.db.models import query
 from rest_framework import generics
-from rest_framework.utils import serializer_helpers
 from schedule.models import ScheduleItem, Tag
 from schedule.serializers import ScheduleItemSerializer, TagSerializer
 from wzcalendar.mixins import BaseViewMixin
@@ -11,6 +10,8 @@ class ScheduleItemListCreate(BaseViewMixin, generics.ListCreateAPIView):
         start_date = self.request.query_params.get('start_date')
         end_date = self.request.query_params.get('end_date')
         tag = self.request.query_params.get('tag')
+        is_search = True if 'search_str' in self.request.query_params else False
+        search_str = self.request.query_params.get('search_str')
         queryset = ScheduleItem.objects.filter(user=self.request.user)
         if start_date and end_date:
             queryset = queryset.filter(date__gte=start_date, date__lte=end_date)
@@ -19,6 +20,9 @@ class ScheduleItemListCreate(BaseViewMixin, generics.ListCreateAPIView):
                 queryset = queryset.filter(tag=None)
             else:
                 queryset = queryset.filter(tag=tag)
+        if is_search:
+            max_item_count = 5
+            queryset = queryset.exclude(done=True).filter(name__icontains=search_str).order_by('date')[:max_item_count]
         return queryset
 
     serializer_class = ScheduleItemSerializer

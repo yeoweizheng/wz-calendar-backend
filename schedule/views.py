@@ -23,7 +23,7 @@ class ScheduleItemListCreate(BaseViewMixin, generics.ListCreateAPIView):
         if is_search:
             max_item_count = 5
             queryset = queryset.exclude(done=True).filter(name__icontains=search_str).order_by('date')[:max_item_count]
-        return queryset
+        return queryset.order_by('date')
 
     serializer_class = ScheduleItemSerializer
 

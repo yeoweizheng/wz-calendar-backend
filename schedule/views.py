@@ -21,8 +21,12 @@ class ScheduleItemListCreate(BaseViewMixin, generics.ListCreateAPIView):
             else:
                 queryset = queryset.filter(tag=tag)
         if is_search:
-            max_item_count = 5
-            return queryset.exclude(done=True).filter(name__icontains=search_str).order_by('date')[:max_item_count]
+            max_item_count = 10
+            search_terms = search_str.split(' ')
+            queryset = queryset.exclude(done=True)
+            for term in search_terms:
+                queryset = queryset.filter(name__icontains=term)
+            return queryset.order_by('date')[:max_item_count]
         else:
             return queryset.order_by('date')
 
